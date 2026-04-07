@@ -1,0 +1,13 @@
+# --- ALSA output selector (~/.asoundrc with ALSA_OUT env var) ---
+# Source from ~/.bashrc:  [ -f ~/work/claude/smooker/bashrc.alsa ] && . ~/work/claude/smooker/bashrc.alsa
+
+alias alsa.pch='ALSA_OUT=dmpch'        # PCH onboard (default)
+alias alsa.tv='ALSA_OUT=dmtv'          # NVidia HDMI -> TV
+alias alsa.g6='ALSA_OUT=dmg6'          # Creative Sound BlasterX G6 (USB)
+alias alsa.bt='ALSA_OUT=bluetooth'     # Bluetooth A2DP
+
+# Usage:
+#   alsa.g6 mpv file.flac
+#   alsa.tv firefox
+#   alsa.bt spotify
+#   alsa.pch speaker-test -c 2 -t wav -l 1

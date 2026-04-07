@@ -1,0 +1,75 @@
+# --- ALSA config — st (smooker) ---
+# Output selector: ALSA_OUT={dmpch,dmtv,dmg6,bluetooth} (default: dmpch)
+
+# PCH (onboard, Intel HDA)
+pcm.dmpch {
+    type plug
+    slave.pcm {
+        type dmix
+        ipc_key 192959
+        slave.pcm "hw:PCH,0"
+    }
+}
+
+# HDMI (NVidia, port 3 = TV)
+pcm.dmtv {
+    type plug
+    slave.pcm {
+        type dmix
+        ipc_key 192957
+        slave.pcm "hw:NVidia,3"
+    }
+}
+
+# Creative Sound BlasterX G6 (USB DAC, 192 kHz)
+pcm.dmg6 {
+    type plug
+    slave.pcm {
+        type dmix
+        ipc_key 192950
+        slave {
+            pcm "hw:G6,0"
+            rate 192000
+            channels 2
+        }
+    }
+}
+
+# Bluetooth (bluealsa)
+pcm.bluetooth {
+    type plug
+    slave.pcm {
+        type bluealsa
+        device "C4:A9:B8:77:F0:1D"
+        profile "a2dp"
+    }
+}
+
+defaults.bluealsa.service "org.bluealsa"
+defaults.bluealsa.device "C4:A9:B8:77:F0:1D"
+defaults.bluealsa.profile "a2dp"
+defaults.bluealsa.delay 1000
+
+# Default output — switchable via ALSA_OUT env var
+pcm.!default {
+    type asym
+    playback.pcm {
+        @func refer
+        name {
+            @func concat
+            strings [
+                "pcm."
+                { @func getenv vars [ ALSA_OUT ] default "dmpch" }
+            ]
+        }
+    }
+    capture.pcm {
+        type plug
+        slave.pcm "hw:PCH,0"
+    }
+}
+
+ctl.!default {
+    type hw
+    card PCH
+}
