@@ -34,8 +34,7 @@ If your application *requires* PulseAudio API, use [apulse](https://github.com/i
 | `firefox/test_alsa_firefox.sh` | Wrapper: test current firefox or kill+start with `ALSA_OUT` |
 | `firefox/README.md` | Per-tool documentation (tables) |
 | `howto/ALSA_HOWTO.md` | ALSA setup notes — hardware, dmix, troubleshooting |
-| `howto/VIBER_ALSA_HOWTO.md` | Running Viber on pure ALSA via patched apulse |
-| `howto/VIBER_HOWTO.md` | Viber on Gentoo (install, Qt5/Qt6, stylesheet) |
+| `howto/VIBER_ALSA_HOWTO.md` | Full Viber on Gentoo HOWTO: install, fonts, stylesheet, ICU, DPI, Qt5/Qt6, **and pure ALSA via patched apulse + custom ffmpeg 4.4.6 + VDPAU off** |
 | `howto/JACK_HOWTO.md` | JACK for TV audio routing (HDMI playback + snd-dummy capture) |
 
 All Perl scripts have full POD — `perldoc ./ff_pref.pl`.
